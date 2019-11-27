@@ -1,0 +1,23 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-buttons slot="start" align-self-center>
+      <ion-back-button [text]="''" defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title><ion-searchbar></ion-searchbar></ion-title>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-segment (ionChange)="segmentChanged($event)">
+      <ion-segment-button [checked]="true" [value]="'0'">
+        <ion-label>待阅</ion-label>
+      </ion-segment-button>
+      <ion-segment-button [checked]="false" [value]="'1'">
+        <ion-label>待办</ion-label>
+      </ion-segment-button>
+      <ion-segment-button [checked]="false" [value]="'2'">
+        <ion-label>已办</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+</ion-content>

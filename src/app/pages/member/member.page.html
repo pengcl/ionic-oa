@@ -1,0 +1,32 @@
+<ion-content *ngIf="data">
+  <mat-card class="user-info">
+    <mat-card-header>
+      <mat-card-title>{{token.name}}</mat-card-title>
+    </mat-card-header>
+  </mat-card>
+  <app-empty *ngIf="data.length < 1"></app-empty>
+  <ion-list *ngIf="data.length > 0">
+    <ion-list-header>
+      "我" 跟进过的企业
+    </ion-list-header>
+    <mat-card class="example-card" *ngFor="let item of data" [routerLink]="['/pages/company/follow/list',item.assCustId]" [queryParams]="{owner:true}">
+      <mat-card-header>
+        <img mat-card-avatar [src]="FILE_PREFIX_URL + token.faceImg">
+        <mat-card-title>{{item.company}}</mat-card-title>
+        <mat-card-subtitle>{{item.province}} {{item.city}} {{item.area}}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p>
+          {{item.industryNames}}
+        </p>
+      </mat-card-content>
+      <mat-card-actions>
+        <ion-item detail="" lines="none">
+          <ion-label>
+            跟进次数({{item.followCount}})
+          </ion-label>
+        </ion-item>
+      </mat-card-actions>
+    </mat-card>
+  </ion-list>
+</ion-content>

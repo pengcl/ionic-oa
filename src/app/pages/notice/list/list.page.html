@@ -1,0 +1,19 @@
+<ion-content>
+  <ion-list>
+    <ion-item [routerLink]="['/pages/notice/item',item.noticeInfoId]" *ngFor="let item of notices;let i = index" detail [lines]="i === notices?.length - 1 ? 'none' : ''">
+      <ion-avatar slot="start">
+        <ion-text [ngStyle]="{'background-color':'var(--ion-color-' + item.color + ')'}">{{item.userName.slice(0, 1)}}</ion-text>
+      </ion-avatar>
+      <ion-label>
+        <h3>{{item.title}}</h3>
+        <p>{{item.createTime | date : 'yyyy-MM-dd HH:mm'}}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content
+        loadingSpinner="bubbles"
+        loadingText="查看更多...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

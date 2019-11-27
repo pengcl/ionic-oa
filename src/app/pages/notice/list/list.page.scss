@@ -1,0 +1,29 @@
+
+
+ion-list {
+  margin: 12px 0;
+  ion-list-header {
+    padding-right: 16px;
+  }
+  ion-avatar {
+    font-size: 36px;
+    line-height: 1;
+    ion-text {
+      display: block;
+      border-radius: 18px;
+      width: 36px;
+      height: 36px;
+      text-align: center;
+      font-size: 24px;
+      line-height: 36px;
+      color: #fff;
+    }
+  }
+  ion-note {
+    font-size: 12px;
+    text-align: right;
+    p {
+      margin: 5px 0;
+    }
+  }
+}
