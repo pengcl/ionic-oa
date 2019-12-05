@@ -1,0 +1,46 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-title>选择行业</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cancel()">关闭</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <form *ngIf="selectedItems.length > 0">
+    <mat-form-field>
+      <mat-chip-list #selected>
+        <mat-chip *ngFor="let item of selectedItems"
+                  [removable]="true" (removed)="remove(item)">
+          {{item.username}}
+          <mat-icon matChipRemove>cancel</mat-icon>
+        </mat-chip>
+        <input placeholder="已选人员列表"
+               [matChipInputFor]="selected" style="width: 1px;flex: 1 0 1px" readonly>
+      </mat-chip-list>
+    </mat-form-field>
+  </form>
+  <ion-list *ngIf="items && items.length > 0">
+    <ion-list-header>人员列表</ion-list-header>
+    <ion-item *ngFor="let item of items;let i = index" [lines]="i === items.length - 1 ? 'none' : ''">
+      <ion-label>{{item.username}}</ion-label>
+      <ion-checkbox slot="start" [(ngModel)]="item['checked']" (ngModelChange)="getSelected()"></ion-checkbox>
+    </ion-item>
+  </ion-list>
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content
+        loadingSpinner="bubbles"
+        loadingText="查看更多...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-button (click)="confirm()" expand="full">
+      确定
+      <ion-ripple-effect></ion-ripple-effect>
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

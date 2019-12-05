@@ -1,10 +1,21 @@
 <ion-content>
-  <ion-slides pager="true" [options]="slideOpts">
-    <ion-slide *ngFor="let item of data?.noticePictureVoList">
-      <img [src]="item.file">
-      <h2>{{item.pictureWord}}</h2>
-    </ion-slide>
-  </ion-slides>
+  <mat-card class="example-card">
+    <div *ngIf="data?.noticePictureVoList && data?.noticePictureVoList.length > 0" mat-card-image>
+      <ion-slides pager="true" [options]="slideOpts">
+        <ion-slide *ngFor="let item of data?.noticePictureVoList">
+          <img [src]="item.file">
+          <h2>{{item.pictureWord}}</h2>
+        </ion-slide>
+      </ion-slides>
+    </div>
+    <mat-card-content [innerHTML]="data?.noticeInfoVo.text"></mat-card-content>
+    <mat-card-actions>
+      <button mat-button><ion-icon name="md-thumbs-up" [color]="like.liked ? 'danger' : ''"></ion-icon> {{like.count}}</button>
+      <button mat-button><ion-icon name="md-text"></ion-icon> {{commentCount}}</button>
+    </mat-card-actions>
+  </mat-card>
+  <app-comment [id]="id" (count)="countChange($event)" #comment></app-comment>
+  <app-reply (replied)="onReplied($event)" *ngIf="id" [pid]="'-1'" [noticeInfoId]="id"></app-reply>
 </ion-content>
 <ion-footer>
   <ion-toolbar>

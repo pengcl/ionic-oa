@@ -1,9 +1,9 @@
-import {NgModule, QueryList, Query} from '@angular/core';
+import {NgModule, QueryList} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HttpClientModule} from '@angular/common/http';
 import {RouteReuseStrategy} from '@angular/router';
-
+import {CacheModule} from 'ionic-cache';
 import {IonicModule, IonicRouteStrategy} from '@ionic/angular';
 import {SplashScreen} from '@ionic-native/splash-screen/ngx';
 import {StatusBar} from '@ionic-native/status-bar/ngx';
@@ -24,6 +24,7 @@ import {environment} from '../environments/environment';
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    CacheModule.forRoot({keyPrefix: 'oa-cache'}),
     IonicModule.forRoot({
       mode: 'ios'
     }),

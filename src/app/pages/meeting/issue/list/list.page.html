@@ -1,0 +1,37 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-buttons slot="start" class="ion-align-self-center">
+      <ion-back-button [text]="''" defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>议题操作</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <app-empty *ngIf="data && data.length < 1"></app-empty>
+  <ion-list *ngIf="data && data.length > 0" class="issue-list">
+    <ion-list-header>
+      议题
+    </ion-list-header>
+    <ion-item *ngFor="let item of data;let i = index"
+              [lines]="data.length - 1 === i ? 'none' : ''">
+      <ion-label>
+        <h3>{{item.subTopic}}</h3>
+      </ion-label>
+      <ion-icon (click)="delete(item.subId)" name="close-circle" color="danger" slot="end"></ion-icon>
+      <ion-icon *ngIf="i !== 0" (click)="order(item.subId,'u')" name="arrow-dropup-circle" color="primary"
+                slot="end"></ion-icon>
+      <ion-icon *ngIf="data.length - 1 !== i" (click)="order(item.subId,'d')" name="arrow-dropdown-circle"
+                color="primary"
+                slot="end"></ion-icon>
+      <ion-icon [routerLink]="['/pages/meeting/issue/edit',item.subId]" name="alert"
+                color="success"
+                slot="end"></ion-icon>
+    </ion-item>
+  </ion-list>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-button [routerLink]="['/pages/meeting/issue/add',id]" [queryParams]="{orderNo:orderNo}" expand="full">添加议题
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

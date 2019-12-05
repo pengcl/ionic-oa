@@ -1,0 +1,47 @@
+ion-content {
+  --background: #f8f8f8;
+}
+
+ion-avatar {
+  font-size: 24px;
+  margin: 6px 10px 6px 0;
+  width: 24px;
+  height: 24px;
+}
+
+ion-list {
+  margin: 12px 0;
+  ion-label {
+    p {
+      overflow: visible;
+      text-overflow: unset;
+      white-space: pre-wrap;
+    }
+  }
+  &.accessory-list {
+    ion-note {
+      font-size: 12px;
+      text-align: right;
+      p {
+        margin: 5px 0;
+      }
+    }
+  }
+}
+ion-fab-button {
+  &[aria-disabled]{
+    opacity: 0.5;
+  }
+  p {
+    width: 40px;
+    white-space: pre-wrap;
+    font-size: 12px;
+    line-height: 14px;
+  }
+}
+
+mat-card {
+  background: none;
+  border-radius: 0;
+  box-shadow: none !important;
+}

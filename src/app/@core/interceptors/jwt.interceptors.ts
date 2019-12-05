@@ -9,11 +9,12 @@ export class JwtInterceptors implements HttpInterceptor {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const JWT = `Bearer TOKEN`;
+    const JWT = {
+      token: this.authSvc.token() ? this.authSvc.token().token : '',
+      'x-requested-with': 'XMLHttpRequest'
+    };
     req = req.clone({
-      setHeaders: {
-        token: this.authSvc.token() ? this.authSvc.token().token : ''
-      }
+      setHeaders: JWT
     });
     return next.handle(req);
   }

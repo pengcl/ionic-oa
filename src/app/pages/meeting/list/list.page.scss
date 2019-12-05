@@ -1,13 +1,42 @@
-
-ion-list-header {
-  padding-right: 15px;
+ion-header {
+  ion-title {
+    padding-right: 0;
+    padding-left: 10px;
+  }
+  ion-searchbar {
+    padding: 0 12px 0 30px;
+    height: 44px;
+  }
+  ion-segment {
+    font-size: 14px;
+    margin: 10px 0;
+  }
 }
 
-mat-chip-list {
-  mat-chip {
-    font-size: 10px;
-    line-height: 10px;
-    padding: 4px 8px;
-    min-height: 18px;
+ion-list {
+  margin: 12px 0;
+  ion-list-header {
+    padding-right: 16px;
+  }
+  ion-avatar {
+    font-size: 36px;
+    line-height: 1;
+    ion-text {
+      display: block;
+      border-radius: 18px;
+      width: 36px;
+      height: 36px;
+      text-align: center;
+      font-size: 24px;
+      line-height: 36px;
+      color: #fff;
+    }
+  }
+  ion-note {
+    font-size: 12px;
+    text-align: right;
+    p {
+      margin: 5px 0;
+    }
   }
 }

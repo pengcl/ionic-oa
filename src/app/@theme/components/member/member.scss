@@ -1,4 +1,15 @@
-
+form {
+  width: 90%;
+  margin: 15px auto;
+  mat-form-field {
+    width: 100%;
+    mat-chip {
+      font-size: 12px;
+      padding: 5px 6px 5px 10px;
+      min-height: 28px;
+    }
+  }
+}
 ion-list-header {
   position: relative;
 
@@ -19,8 +30,6 @@ ion-list {
 
 ion-item {
   font-size: 12px;
-  --inner-border-width: 0;
-  overflow: inherit;
 
   mat-checkbox {
     margin-right: 10px;

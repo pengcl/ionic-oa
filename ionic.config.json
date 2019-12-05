@@ -1,5 +1,8 @@
 {
-  "name": "ionic-mobile",
-  "integrations": {},
+  "name": "ionic-oa",
+  "integrations": {
+    "capacitor": {},
+    "cordova": {}
+  },
   "type": "angular"
 }

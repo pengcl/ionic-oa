@@ -1,0 +1,20 @@
+<ion-list>
+  <ion-list-header>全部评论({{comments?.length}})</ion-list-header>
+  <ion-item *ngFor="let item of subjectComments;let i = index" [lines]="i === subjectComments?.length - 1 ? 'none' : ''"
+            detail>
+    <ion-avatar slot="start">
+      <ion-icon color="danger" name="md-contact"></ion-icon>
+    </ion-avatar>
+    <ion-label>
+      <h2>{{item.userName}}
+        <ion-text class="date">{{item.commentTime | date : 'yyyy-MM-dd HH:mm:ss'}}</ion-text>
+      </h2>
+      <p class="comment">{{item.content}}</p>
+      <div class="actions">
+        <a href="javascript:;" (click)="item.showReply = !item.showReply">回复({{getCount(item.id)}})</a>
+        <a href="javascript:;" (click)="like(item.id,item.liked)">点赞({{item.upQuantity}})</a>
+      </div>
+      <app-reply (replied)="onReplied($event)" *ngIf="item.showReply" [pid]="item.id" [noticeInfoId]="item.noticeInfoId"></app-reply>
+    </ion-label>
+  </ion-item>
+</ion-list>

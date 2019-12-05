@@ -100,7 +100,7 @@
       我的会议
       <ion-text [routerLink]="['/pages/meeting']" color="danger">查看更多</ion-text>
     </ion-list-header>
-    <ion-item *ngFor="let item of meetings;let i = index" detail [lines]="i === meetings?.length - 1 ? 'none' : ''">
+    <ion-item [routerLink]="['/pages/meeting/item',item.id]" *ngFor="let item of meetings;let i = index" detail [lines]="i === meetings?.length - 1 ? 'none' : ''">
       <ion-avatar slot="start">
         <ion-icon color="danger" name="contacts"></ion-icon>
       </ion-avatar>
@@ -114,7 +114,7 @@
           <ion-text *ngIf="item.status === '2'" color="success">开会中</ion-text>
           <ion-text *ngIf="item.status === '3'" color="secondary">已上会</ion-text>
           <ion-text *ngIf="item.status === '9'" color="warning">已暂停</ion-text>
-          <p *ngIf="item.startTime">{{item.startTime | date : 'yyyy-MM-dd HH:mm'}}</p>
+          <p *ngIf="item.startTime">{{item.startTime |repairDate| date : 'yyyy-MM-dd HH:mm'}}</p>
         </ion-text>
       </ion-note>
     </ion-item>
@@ -125,13 +125,15 @@
       通知公告
       <ion-text [routerLink]="['/pages/notice']" color="danger">查看更多</ion-text>
     </ion-list-header>
-    <ion-item [routerLink]="['/pages/notice/item',item.noticeInfoId]" *ngFor="let item of notices;let i = index" detail [lines]="i === notices?.length - 1 ? 'none' : ''">
+    <ion-item [routerLink]="['/pages/notice/item',item.noticeInfoId]" *ngFor="let item of notices;let i = index" detail
+              [lines]="i === notices?.length - 1 ? 'none' : ''">
       <ion-avatar slot="start">
-        <ion-text [ngStyle]="{'background-color':'var(--ion-color-' + item.color + ')'}">{{item.userName.slice(0, 1)}}</ion-text>
+        <ion-text
+            [ngStyle]="{'background-color':'var(--ion-color-' + item.color + ')'}">{{item.userName.slice(0, 1)}}</ion-text>
       </ion-avatar>
       <ion-label>
         <h3>{{item.title}}</h3>
-        <p>{{item.createTime | date : 'yyyy-MM-dd HH:mm'}}</p>
+        <p>{{item.createTime |repairDate | date : 'yyyy-MM-dd HH:mm'}}</p>
       </ion-label>
     </ion-item>
   </ion-list>
@@ -141,13 +143,15 @@
       部门专栏
       <ion-text [routerLink]="['/pages/notice/dept']" color="danger">查看更多</ion-text>
     </ion-list-header>
-    <ion-item *ngFor="let item of deptNotices;let i = index" detail [lines]="i === deptNotices?.length - 1 ? 'none' : ''">
+    <ion-item *ngFor="let item of deptNotices;let i = index" detail
+              [lines]="i === deptNotices?.length - 1 ? 'none' : ''">
       <ion-avatar slot="start">
-        <ion-text [ngStyle]="{'background-color':'var(--ion-color-' + item.color + ')'}">{{item.issueDep.slice(0, 1)}}</ion-text>
+        <ion-text
+            [ngStyle]="{'background-color':'var(--ion-color-' + item.color + ')'}">{{item.issueDep.slice(0, 1)}}</ion-text>
       </ion-avatar>
       <ion-label>
         <h3>{{item.title}}</h3>
-        <p>{{item.createTime | date : 'yyyy-MM-dd HH:mm'}}</p>
+        <p>{{item.createTime |repairDate| date : 'yyyy-MM-dd HH:mm'}}</p>
       </ion-label>
     </ion-item>
   </ion-list>

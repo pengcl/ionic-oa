@@ -1,6 +1,111 @@
-<ion-content></ion-content>
-<ion-footer>
+<ion-header translucent>
   <ion-toolbar>
-    <ion-button router-direction="back" (click)="back()" color="medium" expand="full">返回</ion-button>
+    <ion-buttons slot="start" class="ion-align-self-center">
+      <ion-back-button [text]="''" defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>会议详情</ion-title>
   </ion-toolbar>
-</ion-footer>
+</ion-header>
+<ion-content>
+  <mat-card *ngIf="data">
+    <mat-card-header>
+      <mat-card-title>{{data.topic}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>议题持续时间：{{timer.h + ':' + timer.m + ':' + timer.s}}</p>
+    </mat-card-content>
+  </mat-card>
+  <ion-list *ngIf="data">
+    <ion-list-header>
+      会议详情
+    </ion-list-header>
+    <ion-item>
+      <ion-label>
+        地点
+      </ion-label>
+      <ion-note>
+        {{data.addr}}
+      </ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        主持
+      </ion-label>
+      <ion-note>
+        {{data.hostNames}}
+      </ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        召开时间
+      </ion-label>
+      <ion-note>
+        {{data.startTime}}
+      </ion-note>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label>
+        <h2>出席人员</h2>
+        <p>{{data.leaderNames}}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+  <ion-list *ngIf="issues && issues.length > 0" class="issue-list">
+    <ion-list-header>
+      议题
+    </ion-list-header>
+    <ion-item [routerLink]="['/pages/meeting/issue/item',item.subId]" *ngFor="let item of issues;let i = index" detail
+              [lines]="issues.length - 1 === i ? 'none' : ''">
+      <ion-label>
+        <h3>{{item.subTopic}}</h3>
+        <p>列席：{{item.subPartNames}}</p>
+        <ion-text [color]="item.subStatus === '2' ? 'danger' : item.subStatus === '3' ? 'success' : item.subStatus === '4' ? 'secondary' : 'warning'">
+          <p style="font-size: 12px">
+            <span *ngIf="item.subStatus === '2'">预计开始时间：</span>
+            <span *ngIf="item.subStatus === '3'">开始时间：</span>
+            <span *ngIf="item.subStatus === '9'">开始时间：</span>
+            <span *ngIf="item.subStatus !== '2' && item.subStatus !== '3' && item.subStatus !== '9'">结束时间</span>
+            {{(item.subStatus !== '2' && item.subStatus !== '3' && item.subStatus !== '9' ? item.subEndTime : item.subStartTime) | repairDate | date : 'yyyy-MM-dd HH:mm'}}
+          </p>
+        </ion-text>
+      </ion-label>
+      <ion-note>
+        <ion-text>
+          <ion-text *ngIf="item.subStatus === '2'" color="danger">未开始</ion-text>
+          <ion-text *ngIf="item.subStatus === '3'" color="success">开会中</ion-text>
+          <ion-text *ngIf="item.subStatus === '4'" color="secondary">已结束</ion-text>
+          <ion-text *ngIf="item.subStatus === '9'" color="warning">已暂停</ion-text>
+          <p>汇报人：{{item.subHostNames}}</p>
+        </ion-text>
+      </ion-note>
+    </ion-item>
+  </ion-list>
+  <ion-fab *ngIf="data && data.status !== '3'" horizontal="end" vertical="bottom" slot="fixed">
+    <ion-fab-button color="danger">
+      操作
+    </ion-fab-button>
+    <ion-fab-list side="start">
+      <ion-fab-button *ngIf="data.status !== '1'" (click)="end()" color="primary">
+        结束
+      </ion-fab-button>
+      <ion-fab-button *ngIf="data.status === '2'" (click)="pause()" color="danger">
+        暂停
+      </ion-fab-button>
+      <ion-fab-button *ngIf="data.status === '9'" (click)="restart()" color="danger">
+        继续
+      </ion-fab-button>
+      <ion-fab-button *ngIf="data.status === '1'" (click)="start()" color="primary">
+        开始
+      </ion-fab-button>
+      <ion-fab-button [routerLink]="['/pages/meeting/issue/list',id]" color="tertiary">
+        议题
+      </ion-fab-button>
+      <ion-fab-button [routerLink]="['/pages/meeting/members',id]" [queryParams]="{type:'issue'}" color="success">
+        通知
+      </ion-fab-button>
+      <ion-fab-button [routerLink]="['/pages/meeting/members',id]" [queryParams]="{type:'attendance'}" color="secondary">
+        签到
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+</ion-content>

@@ -1,0 +1,51 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-buttons slot="start" class="ion-align-self-center">
+      <ion-back-button [text]="''" defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>添加临时议题</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form [formGroup]="form">
+    <mat-form-field>
+      <mat-label>临时议题</mat-label>
+      <textarea formControlName="subTopic" matInput placeholder="请输入议题..." [required]="true"></textarea>
+    </mat-form-field>
+    <mat-form-field (click)="presentModal('subHost')">
+      <mat-chip-list #host ngDefaultControl formControlName="subHostNames" [required]="true">
+        <mat-chip *ngFor="let item of form.get('subHostNames').value">
+          {{item}}
+        </mat-chip>
+        <input placeholder="汇报人"
+               [matChipInputFor]="host" style="width: 1px;flex: 1 0 1px" readonly>
+        <button mat-button matSuffix mat-icon-button>
+          <ion-icon name="arrow-down"></ion-icon>
+        </button>
+      </mat-chip-list>
+    </mat-form-field>
+    <mat-form-field (click)="presentModal('subPart')">
+      <mat-chip-list #parts ngDefaultControl formControlName="subPartNames" [required]="true">
+        <mat-chip *ngFor="let item of form.get('subPartNames').value">
+          {{item}}
+        </mat-chip>
+        <input placeholder="列席人员"
+               [matChipInputFor]="parts" style="width: 1px;flex: 1 0 1px" readonly>
+        <button mat-button matSuffix mat-icon-button>
+          <ion-icon name="arrow-down"></ion-icon>
+        </button>
+      </mat-chip-list>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>预计时长</mat-label>
+      <input [formControlName]="'subSeconds'" matInput
+             placeholder="请选择时间" [required]="true">
+      <span matSuffix>分钟</span>
+    </mat-form-field>
+  </form>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-button (click)="submit()" expand="full">保存议题</ion-button>
+  </ion-toolbar>
+</ion-footer>

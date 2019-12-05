@@ -1,2 +1,47 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-buttons slot="start" class="ion-align-self-center">
+      <ion-back-button [text]="''" defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title><ion-searchbar></ion-searchbar></ion-title>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-segment (ionChange)="segmentChanged($event)">
+      <ion-segment-button [checked]="true" [value]="'n'">
+        <ion-label>未开始</ion-label>
+      </ion-segment-button>
+      <ion-segment-button [checked]="false" [value]="'p'">
+        <ion-label>进行中</ion-label>
+      </ion-segment-button>
+      <ion-segment-button [checked]="false" [value]="'f'">
+        <ion-label>已结束</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
 <ion-content>
+  <app-empty *ngIf="meetings && meetings.length < 1"></app-empty>
+  <ion-list *ngIf="meetings && meetings.length > 0">
+    <ion-list-header>
+      我的会议
+    </ion-list-header>
+    <ion-item [routerLink]="['/pages/meeting/item',item.id]" *ngFor="let item of meetings;let i = index" detail [lines]="i === meetings?.length - 1 ? 'none' : ''">
+      <ion-avatar slot="start">
+        <ion-icon color="danger" name="contacts"></ion-icon>
+      </ion-avatar>
+      <ion-label>
+        <h3>{{item.topic}}</h3>
+        <p>{{item.addr}}</p>
+      </ion-label>
+      <ion-note>
+        <ion-text>
+          <ion-text *ngIf="item.status === '1'" color="danger">待上会</ion-text>
+          <ion-text *ngIf="item.status === '2'" color="success">开会中</ion-text>
+          <ion-text *ngIf="item.status === '3'" color="secondary">已上会</ion-text>
+          <ion-text *ngIf="item.status === '9'" color="warning">已暂停</ion-text>
+          <p *ngIf="item.startTime">{{item.startTime |repairDate| date : 'yyyy-MM-dd HH:mm'}}</p>
+        </ion-text>
+      </ion-note>
+    </ion-item>
+  </ion-list>
 </ion-content>

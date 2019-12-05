@@ -1,12 +1,12 @@
 {
-  "name": "中科华海签单助手",
-  "short_name": "签单助手",
+  "name": "广视通",
+  "short_name": "广视通",
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
   "display": "standalone",
   "scope": "/",
   "start_url": "/",
-  "version":"1.0.0",
+  "version":"1.0.2",
   "icons": [
     {
       "src": "assets/icons/icon-72x72.png",

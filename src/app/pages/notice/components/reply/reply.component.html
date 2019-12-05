@@ -1,0 +1,7 @@
+<form [formGroup]="form">
+  <mat-form-field>
+    <mat-label>{{pid === '-1' ? '评论' : '回复'}}</mat-label>
+    <textarea type="text" formControlName="content" matInput placeholder="请输入您的回复"></textarea>
+  </mat-form-field>
+  <button (click)="reply()" type="button" mat-raised-button color="primary">提交</button>
+</form>

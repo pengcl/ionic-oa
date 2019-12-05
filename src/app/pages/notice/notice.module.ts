@@ -9,7 +9,9 @@ import {NoticeRoutingModule} from './notice-routing.module';
     CommonModule,
     NoticeRoutingModule
   ],
-  declarations: []
+  declarations: [],
+  exports: [],
+  entryComponents: []
 })
 export class NoticePageModule {
 }

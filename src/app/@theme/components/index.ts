@@ -1,5 +1,5 @@
 import {EmptyComponent} from './empty/empty';
-import {IndustryComponent} from './industry/industry';
+import {MemberComponent} from './member/member';
 
 export const COMPONENTS_DECLARATIONS = [EmptyComponent];
-export const ENTRY_COMPONENTS_DECLARATIONS = [IndustryComponent];
+export const ENTRY_COMPONENTS_DECLARATIONS = [MemberComponent];

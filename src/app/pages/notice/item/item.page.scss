@@ -1,12 +1,13 @@
 ion-content {
   --background: #f8f8f8;
+
   ion-slides {
     ion-slide {
       img {
         display: block;
         height: 250px;
         width: 100%;
-        object-fit:unset;
+        object-fit: unset;
       }
 
       h2 {
@@ -35,4 +36,18 @@ ion-content {
       }
     }
   }
+
+  mat-card {
+    box-shadow: none;
+    .mat-card-image {
+      margin-bottom: 0;
+    }
+  }
+}
+app-comment {
+  margin-top: 10px;
+  display: block;
+}
+app-reply {
+  padding: 15px;
 }

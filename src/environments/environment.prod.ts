@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  PREFIX_URL: 'http://120.24.70.186:8004/tv-oa/',
-  FILE_PREFIX_URL: 'http://120.24.70.186:8020/im/'
+  PREFIX_URL: 'http://192.168.31.92:8080/tv-oa/',
+  FILE_PREFIX_URL: 'http://192.168.31.92:8080/im/'
 };

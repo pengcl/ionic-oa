@@ -1,0 +1,15 @@
+ion-content {
+  --background: #f8f8f8;
+}
+ion-list {
+  margin: 12px 0;
+  &.issue-list {
+    ion-note {
+      font-size: 12px;
+      text-align: right;
+      p {
+        margin: 5px 0;
+      }
+    }
+  }
+}

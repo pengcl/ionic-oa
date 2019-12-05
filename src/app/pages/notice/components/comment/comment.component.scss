@@ -1,0 +1,42 @@
+:host{
+  margin-top: 5px;
+}
+ion-list {
+  margin-bottom: 10px;
+}
+ion-avatar {
+  align-self: start;
+  margin-top: 8px;
+  ion-icon {
+    font-size: 36px;
+  }
+}
+
+ion-label {
+  h2 {
+    font-size: 14px;
+    ion-text {
+      font-size: 12px;
+      margin-left: 5px;
+      color: var(--ion-color-medium);
+    }
+  }
+  p {
+    margin-top: 5px;
+  }
+  a {
+    text-decoration: none;
+    font-size: 12px;
+    margin-right: 5px;
+  }
+}
+
+ion-note {
+  ion-icon {
+    font-size: 20px;
+    vertical-align: middle;
+  }
+  ion-text {
+    vertical-align: middle;
+  }
+}

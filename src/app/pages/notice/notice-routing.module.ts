@@ -19,7 +19,7 @@ const routes: Routes = [
       {
         path: '',
         loadChildren: () =>
-          import('./list/list.module').then(m => m.NoticeListPageModule)
+          import('./dept/dept.module').then(m => m.NoticeDeptPageModule)
       }
     ]
   },

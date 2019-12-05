@@ -25,8 +25,8 @@ export class ErrorInterceptor implements HttpInterceptor {
 
   private handleResponse(res: any): void {
     if (res.body) {
-      if (res.body.code) {
-        if (res.body.code === '-1') {
+      if (res.body.code && res.body.code !== '0') {
+        if (res.body.code === '1001') {
           this.authSvc.requestAuth();
         } else {
           this.dialogSvc.show({

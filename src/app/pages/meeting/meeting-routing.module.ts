@@ -24,6 +24,56 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'members/:id',
+    children: [
+      {
+        path: '',
+        loadChildren: () =>
+          import('./members/members.module').then(m => m.MeetingMembersPageModule)
+      }
+    ]
+  },
+  {
+    path: 'issue/list/:id',
+    children: [
+      {
+        path: '',
+        loadChildren: () =>
+          import('./issue/list/list.module').then(m => m.MeetingIssueListPageModule)
+      }
+    ]
+  },
+  {
+    path: 'issue/item/:id',
+    children: [
+      {
+        path: '',
+        loadChildren: () =>
+          import('./issue/item/item.module').then(m => m.MeetingIssueItemPageModule)
+      }
+    ]
+  },
+  {
+    path: 'issue/add/:id',
+    children: [
+      {
+        path: '',
+        loadChildren: () =>
+          import('./issue/add/add.module').then(m => m.MeetingIssueAddPageModule)
+      }
+    ]
+  },
+  {
+    path: 'issue/edit/:id',
+    children: [
+      {
+        path: '',
+        loadChildren: () =>
+          import('./issue/edit/edit.module').then(m => m.MeetingIssueEditPageModule)
+      }
+    ]
+  },
+  {
     path: '',
     redirectTo: 'list',
     pathMatch: 'full'

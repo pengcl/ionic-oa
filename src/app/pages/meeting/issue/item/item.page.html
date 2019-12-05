@@ -1,0 +1,110 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-buttons slot="start" class="ion-align-self-center">
+      <ion-back-button [text]="''" defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>议题详情</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <mat-card *ngIf="data">
+    <mat-card-header>
+      <mat-card-title>{{data.subTopic}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>议题持续时间：{{timer.h + ':' + timer.m + ':' + timer.s}}</p>
+    </mat-card-content>
+  </mat-card>
+  <ion-list *ngIf="data">
+    <ion-list-header>
+      会议详情
+    </ion-list-header>
+    <ion-item>
+      <ion-label>
+        汇报人
+      </ion-label>
+      <ion-note>
+        {{data.subHostNames}}
+      </ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        列席
+        <p>{{data.subPartNames}}</p>
+      </ion-label>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label>
+        预计时长
+      </ion-label>
+      <ion-note>
+        {{data.subTimes}}分钟
+      </ion-note>
+    </ion-item>
+  </ion-list>
+  <ion-list *ngIf="data">
+    <ion-list-header>
+      相关公文
+    </ion-list-header>
+    <ion-item *ngFor="let missive of missives" lines="none" detail>
+      <ion-avatar>
+        <ion-icon name="briefcase"></ion-icon>
+      </ion-avatar>
+      <ion-label>
+        {{missive.mtitle}}
+      </ion-label>
+      <ion-note>
+        <ion-icon name="paper"></ion-icon>
+        <ion-icon name="attach"></ion-icon>
+      </ion-note>
+    </ion-item>
+  </ion-list>
+  <ion-list *ngIf="data" class="accessory-list">
+    <ion-list-header>
+      相关附件
+    </ion-list-header>
+    <ion-item (click)="preview(accessory.id)" *ngFor="let accessory of accessories" lines="none" detail>
+      <ion-avatar>
+        <ion-icon name="attach"></ion-icon>
+      </ion-avatar>
+      <ion-label>
+        {{accessory.fileName}}
+      </ion-label>
+      <ion-note>
+        <ion-text>{{accessory.uploadUser}}</ion-text>
+        <p>上传时间:{{accessory.uploadDate.time | date : 'yyyy-MM-dd'}}</p>
+      </ion-note>
+    </ion-item>
+  </ion-list>
+  <ion-fab *ngIf="data && data.subStatus !== '4'" horizontal="end" vertical="bottom" slot="fixed">
+    <ion-fab-button color="danger">
+      操作
+    </ion-fab-button>
+    <ion-fab-list side="start">
+      <ion-fab-button (click)="sponsor('s')" *ngIf="data.voteFlag !== 'y' && data.subStatus === '3'"
+                      color="secondary">
+        <p>发起<br>表决</p>
+      </ion-fab-button>
+      <ion-fab-button (click)="sponsor('n')" *ngIf="data.voteFlag === 'y' && data.subStatus === '3'"
+                      color="secondary">
+        <p>取消<br>表决</p>
+      </ion-fab-button>
+      <ion-fab-button (click)="avoid(data.subStatus !== '3',$event)" *ngIf="data.subStatus === '3'"
+                      color="warning">
+        回避
+      </ion-fab-button>
+      <ion-fab-button *ngIf="data.subStatus === '3'" (click)="pause()" color="danger">
+        <p>暂停<br>会议</p>
+      </ion-fab-button>
+      <ion-fab-button *ngIf="data.status === '9'" (click)="restart()" color="danger">
+        <p>继续<br>会议</p>
+      </ion-fab-button>
+      <ion-fab-button *ngIf="data.subStatus === '2'" (click)="start()" color="primary">
+        <p>开始<br>议题</p>
+      </ion-fab-button>
+      <ion-fab-button *ngIf="data.subStatus === '3' || data.subStatus === '9'" (click)="end()" color="primary">
+        <p>结束<br>议题</p>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+</ion-content>
